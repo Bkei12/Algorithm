@@ -1,0 +1,37 @@
+# 고양이와 개는 몇 마리 있을까
+
+SELECT ANIMAL_TYPE, COUNT(ANIMAL_TYPE) AS count 
+FROM ANIMAL_INS
+GROUP BY ANIMAL_TYPE
+HAVING ANIMAL_TYPE IN ('Cat', 'Dog')
+ORDER BY ANIMAL_TYPE
+
+
+------------------------------------------------------
+
+# 진료과별 총 예약 횟수 출력하기
+
+SELECT MCDP_CD AS 진료과코드, COUNT(APNT_NO) AS 5월예약건수
+FROM APPOINTMENT
+WHERE APNT_YMD LIKE '2022-05%'
+GROUP BY MCDP_CD
+ORDER BY 5월예약건수, MCDP_CD
+
+------------------------------------------------------
+# 동명 동물 수 찾기
+
+SELECT NAME, COUNT(*) AS COUNT
+FROM ANIMAL_INS 
+WHERE NAME IS NOT NULL
+GROUP BY NAME 
+HAVING COUNT >= 2
+ORDER BY NAME
+
+------------------------------------------------------
+#성분으로 구분한 아이스크림 총 주문량
+
+SELECT B.INGREDIENT_TYPE, SUM(A.TOTAL_ORDER) AS TOTAL_ORDER
+FROM FIRST_HALF AS A, ICECREAM_INFO AS B
+WHERE A.FLAVOR = B.FLAVOR
+GROUP BY B.INGREDIENT_TYPE
+ORDER BY TOTAL_ORDER
