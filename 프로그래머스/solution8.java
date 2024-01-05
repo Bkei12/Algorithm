@@ -11,3 +11,18 @@ class Solution8 {
         return answer;
     }
 }
+
+class Solution9 {
+    public int solution(String myString, String pat) {
+        
+        String upper_myString = myString.toUpperCase();
+        String upper_pat = pat.toUpperCase();
+    
+        
+        if(upper_myString.contains(upper_pat)){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}

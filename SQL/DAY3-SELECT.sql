@@ -35,3 +35,27 @@ FROM FIRST_HALF AS A, ICECREAM_INFO AS B
 WHERE A.FLAVOR = B.FLAVOR
 GROUP BY B.INGREDIENT_TYPE
 ORDER BY TOTAL_ORDER
+
+
+-- 계좌 이체 트랜잭션 예시
+BEGIN TRANSACTION; -- 트랜잭션 시작
+
+-- 송금 계좌에서 금액 감소
+UPDATE 계좌
+SET 잔액 = 잔액 - 100
+WHERE 계좌번호 = '123';
+
+-- 수신 계좌에서 금액 증가
+UPDATE 계좌
+SET 잔액 = 잔액 + 100
+WHERE 계좌번호 = '456';
+
+-- 트랜잭션 완료
+COMMIT;
+
+-- 지속성 확인
+-- 트랜잭션이 완료된 후에도 변경 사항이 데이터베이스에 남아 있는지 확인
+SELECT *
+FROM 계좌
+WHERE 계좌번호 IN ('123', '456');
+
